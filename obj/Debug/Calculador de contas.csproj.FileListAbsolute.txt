@@ -1,0 +1,14 @@
+C:\Users\mathe\source\repos\Calculador de contas\bin\Debug\Calculador de contas.exe.config
+C:\Users\mathe\source\repos\Calculador de contas\bin\Debug\Calculador de contas.exe
+C:\Users\mathe\source\repos\Calculador de contas\bin\Debug\Calculador de contas.pdb
+C:\Users\mathe\source\repos\Calculador de contas\obj\Debug\Calculador de contas.csproj.AssemblyReference.cache
+C:\Users\mathe\source\repos\Calculador de contas\obj\Debug\Calculador de contas.csproj.CoreCompileInputs.cache
+C:\Users\mathe\source\repos\Calculador de contas\obj\Debug\Calculador de contas.exe
+C:\Users\mathe\source\repos\Calculador de contas\obj\Debug\Calculador de contas.pdb
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\bin\Debug\Calculador de contas.exe.config
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\bin\Debug\Calculador de contas.exe
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\bin\Debug\Calculador de contas.pdb
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\obj\Debug\Calculador de contas.csproj.AssemblyReference.cache
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\obj\Debug\Calculador de contas.csproj.CoreCompileInputs.cache
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\obj\Debug\Calculador de contas.exe
+C:\Users\mathe\Desktop\Programação\C#\Projetos\Calculador de contas\obj\Debug\Calculador de contas.pdb
