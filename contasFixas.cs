@@ -10,31 +10,39 @@ namespace Calculador_de_contas
     internal class contasFixas
     {
 
-        public float agua;
-        public float luz;
-        public float net;
-        public float cartao;
-        public float celular;
-        public float add = 0; //adicional
-    
-
-        public float CF()
+        public float agua, luz, net, cartao, celular, add = 0;
+        
+        // Calculo dos valores inseridos pelo usuario
+        public float ContasFixas()
         {
-            float soma1 = agua + luz + net + cartao + celular;
-            return soma1;
+            float somafixas = agua + luz + net + cartao + celular;
+            return somafixas;
         }
-        public float Somar()
+        public float ContasADD()
         {
-            float soma = agua + luz + net + cartao + celular + add;
-            return soma;
+            float somaAdd = agua + luz + net + cartao + celular + add;
+            return somaAdd;
         }
 
-        public float Guardar(float n1)
+
+        // Resultado final das entradas dos usuarios
+        public float Guardar(float ValorGuardar)
         {
-            float n2 = n1 * 0.1f;
-            return n2;
+            ValorGuardar = ValorGuardar * 0.1f;
+            return ValorGuardar;
         }
 
+        public float SalarioLiquido(float salario, float totalPagar, float guardar)
+        {
+            salario = (salario - totalPagar) - guardar;
+            return salario;
+        }
+
+        public float SalarioSemEmergencia(float salario, float totalPagar)
+        {
+            salario = salario - totalPagar;
+            return salario;
+        }
     }
 }
  

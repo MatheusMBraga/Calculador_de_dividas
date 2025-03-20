@@ -11,101 +11,131 @@ namespace Calculador_de_contas
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("-------------------- CALCULO DE CONTAS DO MÊS --------------------\n\n");
-            float salario = 0; // Variável para armazenar o salário convertido
-            bool entradaValida = false;
-
-            while (!entradaValida) // Repete até que a entrada seja válida
+            string escolha;
+            do
             {
-                Console.Write("Informe seu salário líquido: ");
-                string salario1 = Console.ReadLine();
+                
+                Console.WriteLine("-------------------- CALCULO DE CONTAS DO MÊS --------------------\n\n");
+                float salario = 0; // Variável para armazenar o salário
+                bool entradaValida = false;
+                escolha = string.Empty;
 
-                if (float.TryParse(salario1, out salario))
+                
+                // Inserir salario
+
+                while (!entradaValida) // Repete até que a entrada seja válida
                 {
-                    entradaValida = true; // Marca como válido para sair do loop
-                    Console.WriteLine();
+                    Console.Write("Informe seu salário líquido: ");
+                    string entradaValor = Console.ReadLine();
+
+
+                    if (entradaValor.Contains('.'))
+                    {
+                        Console.WriteLine("Entrada inválida! Use virgula ao invez de ponto.\n");
+                        continue; // Volta para o início do loop
+                    }
+
+
+                    if ((float.TryParse(entradaValor, out salario) && salario > 0))
+                    {
+                        entradaValida = true; // Marca como válido para sair do loop
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Entrada inválida. Por favor, insira um número válido.");
+                        Console.WriteLine();
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Entrada inválida. Por favor, insira um número válido.");
-                    Console.WriteLine();
-                }
-            }
 
-            Console.WriteLine("\n______________________________________________________________\n");
-            Console.WriteLine("\n*ATENCAO* caso não tenha a divida, informar com valor zero (0). \n");
-            Console.WriteLine("Pressione qualquer tecla...");
-            Console.ReadKey();
-            Console.WriteLine("\n\n_____________________ DIVIDAS FIXAS _____________________\n");
-            Console.WriteLine("Preencha os campos com os repectivos valores de cada divida:\n");
+                Console.WriteLine("\n______________________________________________________________\n");
+                Console.WriteLine("\n*ATENCAO* caso não tenha a divida, informar com valor zero (0). \n");
+                Console.WriteLine("Pressione qualquer tecla...");
+                Console.ReadKey();
+                Console.WriteLine("\n\n_____________________ DIVIDAS FIXAS _____________________\n");
+                Console.WriteLine("Preencha os campos com os repectivos valores de cada divida:\n");
 
-            contasFixas contas = new contasFixas();
+                
+                //Inserir dados das contas Fixas
 
-            Console.Write("Agua: ");
-            contas.agua = float.Parse(Console.ReadLine());
+                contasFixas contas = new contasFixas();
 
-            Console.Write("Luz: ");
-            contas.luz = float.Parse(Console.ReadLine());
+                // possivel [ERRO] quando nao inserido nenhum valor
+                Console.Write("Agua: ");
+                contas.agua = float.Parse(Console.ReadLine());
 
-            Console.Write("internet (WI-FI): ");
-            contas.net = float.Parse(Console.ReadLine());
+                Console.Write("Luz: ");
+                contas.luz = float.Parse(Console.ReadLine());
 
-            Console.Write("Cartao de credito: ");
-            contas.cartao = float.Parse(Console.ReadLine());
+                Console.Write("internet (WI-FI): ");
+                contas.net = float.Parse(Console.ReadLine());
 
-            Console.Write("Fatura do celular: ");
-            contas.celular = float.Parse(Console.ReadLine());
+                Console.Write("Cartao de credito: ");
+                contas.cartao = float.Parse(Console.ReadLine());
 
-            Console.WriteLine("\n____________________________\n\n");
-            Console.Write("Possui outra divida? (S/N): ");
-            string escolha = Console.ReadLine().ToUpper();
+                Console.Write("Fatura do celular: ");
+                contas.celular = float.Parse(Console.ReadLine());
 
-            if (escolha == "S")
-            {
-                Console.WriteLine("\n\n__________________________ DIVIDAS ADICIONAIS _________________________");
-            }
-            while (escolha == "S"){
+                
+                //Dividas adicionais
 
-                Console.Write("\nDivida adicional: ");
-                string contaA = Console.ReadLine();
-
-                float contaA1 = float.Parse(contaA);
-                contas.add += contaA1;
-
-                Console.Write("\nPossui mais alguma conta? (S/N): ");
+                Console.WriteLine("\n____________________________\n\n");
+                Console.Write("Possui outra divida? (S/N): ");
                 escolha = Console.ReadLine().ToUpper();
 
-                if (escolha == "N")
+                while (escolha == "S")
                 {
-                    break;
+                    Console.WriteLine("\n\n__________________________ DIVIDAS ADICIONAIS _________________________\n");
+
+                    Console.Write("\nDivida adicional: ");
+                    contas.add = float.Parse(Console.ReadLine());
+
+                    Console.Write("\nPossui mais alguma conta? (S/N): ");
+                    escolha = Console.ReadLine().ToUpper();
+
+                    if (escolha == "N")
+                    {
+                        break;
+                    }
+                    escolha = string.Empty;
                 }
-            }
-            Console.WriteLine("\n\n_____________________ VALORES A PAGAR ______________________\n");
 
-            if (contas.add > 0) {
-                Console.WriteLine("- VALORES ADICIONAIS:".PadRight(30) +$" R$ {contas.add:F2}");
-            }
+                
+                // Calculo de gastos 
 
-            float fixas = contas.CF();
-            Console.WriteLine("- CONTAS FIXAS:".PadRight(30) + $" R$ {fixas:F2}");
+                Console.WriteLine("\n\n_____________________ VALORES A PAGAR ______________________\n");
 
-            float guardar = contas.Guardar(salario);
-            Console.WriteLine("- 10% P/ FUNDO DE EMERGENCIA:".PadRight(30) +$" R$ {guardar:F2}");
+                if (contas.add > 0)
+                {
+                    Console.WriteLine("- VALORES ADICIONAIS:".PadRight(30) + $" R$ {contas.add:F2}");
+                }
 
-            Console.WriteLine("\n_________________________________________");
-            float totalAPagar = contas.Somar();
-            Console.WriteLine("- TOTAL A PAGAR:".PadRight(30) + $" R$ {totalAPagar + guardar:F2}");
+                Console.WriteLine("- CONTAS FIXAS:".PadRight(30) + $" R$ {contas.ContasFixas():F2}");
+
+                Console.WriteLine("- 10% P/ FUNDO DE EMERGENCIA:".PadRight(30) + $" R$ {contas.Guardar(salario):F2}");
+
+                Console.WriteLine("\n_________________________________________");
+                float totalAPagar = contas.ContasADD();
+                Console.WriteLine("- TOTAL A PAGAR:".PadRight(30) + $" R$ {totalAPagar + contas.Guardar(salario):F2}");
+
+                
+                // Valor a receber 
+
+                Console.WriteLine("\n\n_____________________ VALORES A RECEBER ______________________\n");
 
 
-            Console.WriteLine("\n\n_____________________ VALORES A RECEBER ______________________\n");
+                Console.WriteLine("- SEM FUNDO DE EMERGENCIA:".PadRight(30) + $" R$ {contas.SalarioSemEmergencia(salario, totalAPagar):F2}");
+                Console.WriteLine("\n_________________________________________");
+                Console.WriteLine("- LIQUIDO A RECEBER:".PadRight(30) + $" R$ {contas.SalarioLiquido(salario, totalAPagar, contas.Guardar(salario)):F2}\n");
 
-            float liquidoAReceber = (salario - totalAPagar) - guardar;
-            Console.WriteLine("- SEM FUNDO DE EMERGENCIA:".PadRight(30) + $" R$ {salario - totalAPagar:F2}");
-            Console.WriteLine("\n_________________________________________");
-            Console.WriteLine("- LIQUIDO A RECEBER:".PadRight(30) +$" R$ {liquidoAReceber:F2}\n");
+                Console.WriteLine("______________________________________________________________________\nPrecione qualquer tecla...\n");
+                Console.ReadKey();
+                Console.Write("Deseja realizar outro calculo? (S/N): ");
+                escolha = Console.ReadLine().ToUpper();
+                Console.WriteLine("\n");
+            } while (escolha == "S");
             
-            Console.WriteLine("______________________________________________________________________\n\n");
-            Console.WriteLine("\nPressione qualquer tecla...");
+            Console.WriteLine("\n______________________________________________________________________");
             Console.ReadKey();
 
         }
